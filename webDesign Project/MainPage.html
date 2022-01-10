@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<link rel="icon" href="travel.png" type="image/x-icon"/>  
+	<meta http-equiv="Content-Type" content="width=device-width, initial-scale=1, maximum-scale=1, 
+	user-scalable=no, text/html; charset=UTF-8;" />
+	<title>
+	MainPage	 
+	</title>
+	<link href="Design.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript">
+		/*设置淡入淡出，鼠标点击事件*/
+		function run() {
+			document.getElementById('FormForLogin').style.display = 'block';
+		}
+		
+		window.onload = function() {
+			var oDiv = document.getElementById('SidebarToLogin');
+			oDiv.onmousewheel = fn;  //给div添加鼠标滚轮事件,非火狐浏览器
+			if (oDiv.addEventListener) {  //火狐浏览器添加鼠标滚轮事件
+				oDiv.addEventListener('DOMMouseScroll', fn, false);
+			}
+			var i = 0; //设置滚动次数
+			function fn(ev) {  
+				var ev = ev || event;  //事件的浏览器兼容性
+				var b = true;  //设置鼠标向上还是向下滚动的变量
+				if (ev.wheelDelta) {  //如果方法存在说明是非火狐浏览器
+					b = ev.wheelDelta > 0 ? true : false;  //如果大于0为true向上，小于0为false向下
+				} else {
+					b = ev.detail < 0 ? true : false; //火狐浏览器
+				} 
+				
+				if ( b ) { //如果滚轮向上
+					i=i-1;
+					this.style.height = this.offsetHeight - 10 + 'px';  //div高度-10
+				} else {
+					i=i+1;
+					this.style.height = this.offsetHeight + 10 + 'px'; //div高度+10
+				}
+				if (i>=4) {
+					window.open("Register.php");
+					i = -100;
+				} //下滑到一定距离，弹窗
+				
+				if (ev.preventDefault) { //取消火狐的默认事件
+					ev.preventDefault();
+				}
+				return false;  //取消非火狐的滚轮默认事件   
+			}
+		}
+		/*鼠标over事件*/
+		function OnMouceOver(){
+			alert("大家好，这里是我组的期末作业。对鼠标滚轮进行操作来注册您的账号。");
+		}
+	</script>
+</head>
+<body>
+<div class="MainBox">
+	<div class="Tips" onmouseover="OnMouceOver();">
+		<img src="./tipss.png" style="width:40px; height:40px">
+	</div>
+		
+	<div id="SidebarToLogin">
+		<img src="./RollerWheel.png" style="width:40px;"/>
+	</div>
+	
+	<div class="VideoBox">
+	
+		<video autoplay loop muted>
+		  <source src="./MainVideo.mp4" type="video/mp4"  />
+		</video>
+		
+	</div>
+	
+	<div id="LoginOrRegister">
+		<img src="./image.png" style="height:270px; width:840px;"/>
+	</div>
+	
+	<div class="indexToLogin" href="javascript:void(0)" onclick="run()">
+		<img src="./ArrowDown.png" style="width: 60px;"  alt="Click Tips!" 
+		title="Click Here TO Enjoy An Magical TRAVEL!!"/>
+	</div>
+	
+	<form method="post" action="LoginAndCheck.php" id="FormForLogin">
+		<div class="BiaoGe" ><!--这部分是表格div。-->		
+			<div class="username">
+				<input type="text" name="Name" value="" placeholder="USERNAME"/>
+			</div>
+			
+			<div class="password">
+				<input type="password"  name="Password" value="" placeholder="PASSWORD"/>
+			</div>
+			
+			<div class="login">
+				<input type="submit"  name="submit" value="SUBMIT!" />
+			</div>			
+		</div>
+	</form>
+	
+</div>
+<div class="Footer">
+		<p>@广东外语外贸大学学生作业</p>
+</div>
+</body>
+</html>
